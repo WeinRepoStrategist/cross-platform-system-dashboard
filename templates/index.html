@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-chart-line"></i> Monitor</h3>
+        </div>
+        <ul class="menu-links">
+            <li>
+                <a href="#dashboard" class="menu-link active" id="dashboard-link">
+                    <i class="fas fa-tachometer-alt"></i> <span>System Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#system" class="menu-link" id="system-link">
+                    <i class="fas fa-thermometer-half"></i> <span>Temperatures</span>
+                </a>
+            </li>
+            <li>
+                <a href="#network" class="menu-link" id="network-link">
+                    <i class="fas fa-network-wired"></i> <span>Network</span>
+                </a>
+            </li>
+             <li>
+                <a href="#users" class="menu-link" id="users-link">
+                    <i class="fas fa-users"></i> <span>Active Users</span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div id="date-chip" class="chip"></div>
+            <div class="theme-switcher">
+                <input type="checkbox" id="theme-toggle">
+                <label for="theme-toggle" class="slider">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <section id="dashboard-section" class="content-section">
+            <h1>System Dashboard</h1>
+            <div id="alert-message" class="alert hidden"></div>
+            <div class="metrics-container">
+                <div class="metric-card" id="cpu-card">
+                    <h2>CPU Usage</h2>
+                    <div class="progress-circle-container">
+                        <svg class="progress-ring" width="160" height="160">
+                            <circle class="progress-ring__background" r="70" cx="80" cy="80"/>
+                            <circle class="progress-ring__circle" id="cpu-circle" r="70" cx="80" cy="80"/>
+                        </svg>
+                        <span class="metric-value" id="cpu-value">0%</span>
+                    </div>
+                </div>
+                <div class="metric-card" id="mem-card">
+                    <h2>Memory Usage</h2>
+                    <div class="progress-circle-container">
+                        <svg class="progress-ring" width="160" height="160">
+                            <circle class="progress-ring__background" r="70" cx="80" cy="80"/>
+                            <circle class="progress-ring__circle" id="mem-circle" r="70" cx="80" cy="80"/>
+                        </svg>
+                        <span class="metric-value" id="mem-value">0%</span>
+                    </div>
+                </div>
+                <div class="metric-card" id="disk-card">
+                    <h2>Disk Usage</h2>
+                    <div class="progress-circle-container">
+                        <svg class="progress-ring" width="160" height="160">
+                           <circle class="progress-ring__background" r="70" cx="80" cy="80"/>
+                           <circle class="progress-ring__circle" id="disk-circle" r="70" cx="80" cy="80"/>
+                        </svg>
+                        <span class="metric-value" id="disk-value">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="process-container">
+                <div id="cpu-processes" class="process-list hidden">
+                    <h3>Top 5 CPU Processes</h3>
+                    <table><thead><tr><th>PID</th><th>Name</th><th>CPU %</th></tr></thead><tbody id="cpu-process-body"></tbody></table>
+                </div>
+                <div id="mem-processes" class="process-list hidden">
+                    <h3>Top 5 Memory Processes</h3>
+                    <table><thead><tr><th>PID</th><th>Name</th><th>Memory %</th></tr></thead><tbody id="mem-process-body"></tbody></table>
+                </div>
+                <div id="disk-processes" class="process-list hidden">
+                    <h3>Top 5 Disk I/O Processes</h3>
+                    <table><thead><tr><th>PID</th><th>Name</th><th>Total I/O</th></tr></thead><tbody id="disk-process-body"></tbody></table>
+                </div>
+            </div>
+        </section>
+
+        <section id="system-section" class="content-section hidden">
+            <h1>Hardware Temperatures</h1>
+            <div class="info-card">
+                <h2>Sensor Readings</h2>
+                <div id="temperatures-container">
+                    <p>No temperature data available.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="network-section" class="content-section hidden">
+            <h1>Network Monitoring</h1>
+            <div class="network-container">
+                <div class="network-card"><i class="fas fa-arrow-up"></i><div><h3>Data Sent</h3><p id="bytes-sent">0 B</p></div></div>
+                <div class="network-card"><i class="fas fa-arrow-down"></i><div><h3>Data Received</h3><p id="bytes-recv">0 B</p></div></div>
+                <div class="network-card"><i class="fas fa-paper-plane"></i><div><h3>Packets Sent</h3><p id="packets-sent">0</p></div></div>
+                <div class="network-card"><i class="fas fa-inbox"></i><div><h3>Packets Received</h3><p id="packets-recv">0</p></div></div>
+            </div>
+            <div class="table-container">
+                <h2>Active Network Connections</h2>
+                <table><thead><tr><th>Process</th><th>Local Address</th><th>Remote Address</th><th>Status</th></tr></thead><tbody id="connections-body"></tbody></table>
+            </div>
+        </section>
+
+        <section id="users-section" class="content-section hidden">
+            <h1>Active Users</h1>
+            <div class="table-container">
+                <h2>Currently Logged-in Users</h2>
+                <table><thead><tr><th>Username</th><th>Terminal</th><th>Host</th><th>Login Time</th></tr></thead><tbody id="users-body"></tbody></table>
+            </div>
+        </section>
+    </main>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
