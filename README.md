@@ -1,19 +1,5 @@
-# **Cloud Native Resource Monitoring Python App on K8s!**
-
-## Things you will Learn 🤯
-
-1. Python and How to create Monitoring Application in Python using Flask and psutil
-2. How to run a Python App locally.
-3. Learn Docker and How to containerize a Python application
-    1. Creating Dockerfile
-    2. Building DockerImage
-    3. Running Docker Container
-    4. Docker Commands
-
 ### **Prerequisites** !
-
-(Things to have before starting the projects)
-
+- [x]  AWS Account.
 - [x]  Python3 Installed.
 - [x]  Docker  installed.
 - [x]  Code editor (Vscode)
