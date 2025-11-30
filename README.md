@@ -1,77 +1,20 @@
-### **Prerequisites** !
-- [x]  AWS Account.
-- [x]  Python3 Installed.
-- [x]  Docker  installed.
-- [x]  Code editor (Vscode)
-
-# ✨Let’s Start the Project ✨
-
-## **Part 1: Deploying the Flask application locally**
-
-
-### **Step 1: Install dependencies**
-
-The application uses the **`psutil`** and **`Flask`, Plotly,** libraries. Install them using pip:
-
-```
-pip3 install -r requirements.txt
-```
-
-### **Step 2: Run the application**
-
-To run the application, navigate to the root directory of the project and execute the following command:
-
-```
-python3 app.py
-```
-
-This will start the Flask server on **`localhost:5000`**. Navigate to [http://localhost:5000/](http://localhost:5000/) on your browser to access the application.
-
-## **Part 2: Dockerizing the Flask application**
-
-### **Step 1: Create a Dockerfile**
-
-Create a **`Dockerfile`** in the root directory of the project with the following contents:
-
-```
-# Use the official Python image as the base image
-FROM python:3.9-slim-buster
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the requirements file to the working directory
-COPY requirements.txt .
-
-RUN pip3 install --no-cache-dir -r requirements.txt
-
-# Copy the application code to the working directory
-COPY . .
-
-# Set the environment variables for the Flask app
-ENV FLASK_RUN_HOST=0.0.0.0
-
-# Expose the port on which the Flask app will run
-EXPOSE 5000
-
-# Start the Flask app when the container is run
-CMD ["flask", "run"]
-```
-
-### **Step 2: Build the Docker image**
-
-To build the Docker image, execute the following command:
-
-```
-docker build -t <image_name> .
-```
-
-### **Step 3: Run the Docker container**
-
-To run the Docker container, execute the following command:
-
-```
-docker run -p 5000:5000 <image_name>
-```
-
-This will start the Flask server in a Docker container on **`localhost:5000`**. Navigate to [http://localhost:5000/](http://localhost:5000/) on your browser to access the application.
+CROSS-PLATFORM CLOUD SERVER MONITORING SYSTEM
+Overview
+[cite_start]This application is a Cross-Platform Cloud Server Monitoring System [cite_start]designed for real-time performance visualization and oversight of remote cloud servers. [cite_start]It is a web-based application [cite_start]that runs directly on a cloud instance, providing a simple, accessible dashboard for system administrators.  
+[cite_start]It leverages the Python Flask micro-framework and the psutil library to acquire real-time system metrics from the Ubuntu OS Kernel. [cite_start]The frontend uses HTML5, CSS3, and JavaScript with AJAX calls for dynamic, graphical visualization using SVG progress gauges.  
+Features
+[cite_start]The system provides a unified, visually intuitive dashboard and offers the following monitoring capabilities:  
+[cite_start]Real-time Metrics: Displays CPU utilization, Memory usage, and Disk I/O using dynamic SVG Progress Gauges.  
+[cite_start]Detailed Process Isolation: Explicitly lists the Top 5 consuming processes by CPU, Memory, and Disk I/O.  
+[cite_start]Network Statistics: Shows total bytes/packets sent and received, along with a list of active TCP/IP connections.  
+[cite_start]System and User Information: Displays current hardware temperature readings and a table of currently logged-in users.  
+[cite_start]Cross-Platform Accessibility: Accessible via a standard web browser on any device.  
+[cite_start]Theming: Allows users to Switch Dark/Light Theme and remembers the selection using Local Storage.  
+[cite_start]Alerting: Displays a prominent red alert message when usage exceeds 80% for CPU or Memory.  
+Implementation Details
+[cite_start]The system follows the Model-View-Controller (MVC) architectural pattern:  
+Controller (Flask): Manages API endpoints.
+[cite_start]Model (psutil): Handles data acquisition from the Linux kernel.  
+[cite_start]View (HTML/JS/CSS): Serves the dashboard for visualization.  
+Installation
+[cite_start]The application is deployed on an AWS EC2 Instance running Ubuntu Server.
