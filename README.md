@@ -41,18 +41,16 @@ The system was successfully deployed on an **AWS EC2 Ubuntu 20.04 LTS instance**
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/WeinRepoStrategist/cross-platform-system-dashboard](https://github.com/WeinRepoStrategist/cross-platform-system-dashboard)
+    git clone https://github.com/WeinRepoStrategist/cross-platform-system-dashboard
     ```
 2.  **Ensure Prerequisites are Installed (on EC2):**
     ```bash
-    # Example: Install Python dependencies
     pip install flask psutil 
     ```
 3.  **Ensure Networking is Configured:**
     * The AWS **Security Group** must be correctly configured to allow inbound traffic on the Flask application's port (e.g., **TCP 5000**).
 4.  **Run the Flask application:**
     ```bash
-    # Example command to run the Python server
     python app.py
     ```
 5.  **Access the Dashboard:** Open your web browser and navigate to the following URL:
